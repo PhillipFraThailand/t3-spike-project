@@ -33,10 +33,20 @@ export function CreatePost() {
       />
       <button
         type="submit"
-        className="rounded-full bg-white/10 px-10 py-3 font-semibold transition hover:bg-white/20"
+        className="GlowingButton "
         disabled={createPost.isLoading}
       >
-        {createPost.isLoading ? "Submitting..." : "Submit"}
+        <div className="GlowingButton__glowWrap l">
+          <span className="GlowingButton__glow"></span>
+        </div>
+        <div className="GlowingButton__glowWrap r">
+          <span className="GlowingButton__glow"></span>
+        </div>
+        <span className="GlowingButton__overlay"></span>
+        <div className="GlowingButton__content">
+          <span>{createPost.isLoading ? "Submitting..." : "Submit"}</span>
+          <span>{createPost.isLoading ? "Submitting..." : "Submit"}</span>
+        </div>
       </button>
     </form>
   );

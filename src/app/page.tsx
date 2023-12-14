@@ -4,19 +4,26 @@ import { api } from "~/trpc/server";
 import { UserButton } from "@clerk/nextjs";
 
 export default async function Home() {
-  const allPosts = await api.post.getAll.query();
+  const data = await api.post.getAll.query();
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-      <UserButton afterSignOutUrl="/" />
-      <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-        <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
-          Phillip Eismark
-        </h1>
-        <CrudShowcase />
-        {allPosts?.map((post) => (
-          <div key={`${post.id}-${post.createdAt.toDateString()}`}>
-            Name: {post.name} Content: {post.content}
+    <main className="body flex h-screen justify-center">
+      <div className="h-full w-full border-x border-slate-400 bg-black md:max-w-6xl">
+        <div className="border-b p-4">
+          <UserButton afterSignOutUrl="/" />
+          <h1 className="">Phillip Eismark</h1>
+          <CrudShowcase />
+        </div>
+
+        {data?.map((post) => (
+          <div
+            key={`${post.id}-${post.createdAt.toDateString()}`}
+            className="border-b  border-slate-400 p-8"
+          >
+            <div>
+              {post.name}
+              {post.content}
+            </div>
           </div>
         ))}
       </div>
